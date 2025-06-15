@@ -2,10 +2,11 @@
 # basically I made the backend very straightforward so it just renders pages and handles form submissions, no more user login or database as I didnt think we would need them for a bussiness site.
 #  It's clean, and fastr for a company site.
 
+
 from flask import Flask, render_template, request, redirect, flash
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'moore-ai-secret'  # For flash messages
+app.config['SECRET_KEY'] = 'moore-ai-secret'
 
 @app.route('/')
 def index():
@@ -14,6 +15,10 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/services')
+def services():
+    return render_template('services.html')
 
 @app.route('/team')
 def team():
@@ -31,6 +36,7 @@ def projects():
 def faq():
     return render_template('faq.html')
 
+
 @app.route('/contact', methods=['POST'])
 def contact():
     name = request.form.get('name')
@@ -41,5 +47,19 @@ def contact():
     flash('Your message has been received!', 'success')
     return redirect('/')
 
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    email = request.form.get('email')
+    with open('subscribers.txt', 'a') as f:
+        if email:
+            f.write(email + '\n')
+    flash("You're subscribed!", "success")
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
