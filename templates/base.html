@@ -1,8 +1,6 @@
 <!--
  I basiucally built a master template so all pages share the same nav/footer/branding—keeps everything consistent and even mobile friendly
- # NOTE: try opening the page on a mobile device to check if the nav is responsive
- 
--->
+ # NOTE: try opening the page on a mobile device to check if the nav is responsive -->
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,27 +10,35 @@
   <title>Moore AI - {{ title if title else 'Home' }}</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
-  <script src="https://cdn.jsdelivr.net/npm/sonner@0.6.2/dist/sonner.min.js"></script>
 </head>
+
+
 <body class="min-h-screen bg-black text-white">
+
   <header class="bg-black shadow-lg border-b border-red-900">
     <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-red-500">Moore AI</h1>
-      <nav class="space-x-6 text-gray-300 hidden md:flex">
-        <a href="/" class="hover:text-red-400">Home</a>
-        <a href="/about" class="hover:text-red-400">About</a>
-        <a href="/services" class="hover:text-red-400">Services</a>
-        <a href="/team" class="hover:text-red-400">Team</a>
-        <a href="/projects" class="hover:text-red-400">Projects</a>
-        <a href="/testimonials" class="hover:text-red-400">Testimonials</a>
-        <a href="/faq" class="hover:text-red-400">FAQ</a>
-        <a href="#contact" class="hover:text-red-400">Contact</a>
+<div class="flex items-center space-x-3 pr-4">
+  <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo" class="w-14 h-14 object-contain"> <!-- logo placeholder, enlarged and aligned -->
+  <h1 class="text-3xl font-bold text-red-500" style="font-family: 'Ardela Edge', sans-serif;">Moore AI</h1>
+</div>
+
+      <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-red-400">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <nav id="main-nav" class="hidden md:flex space-x-4 text-sm font-bold text-white">
+{% for label, path in [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('Projects', '/projects'), ('Testimonials', '/testimonials'), ('FAQ', '/faq')] %}
+  <a href="{{ path }}" class="{% if request.path == path %}bg-red-700 text-white px-3 py-1 rounded-md{% else %}hover:text-red-400 text-white{% endif %}">{{ label }}</a>
+  <span class="text-red-500 font-bold">|</span> <!-- separator between every item -->
+{% endfor %}
+<a href="/#contact" class="hover:text-red-400 text-white">Contact</a>
+
       </nav>
     </div>
   </header>
 
-  <main>
-    <!-- Flash notifications -->
+  <main class="animate-fade-in-up">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="fixed top-6 right-6 space-y-4 z-50">
@@ -42,17 +48,31 @@
         </div>
       {% endif %}
     {% endwith %}
-
     {% block content %}{% endblock %}
   </main>
 
   <footer class="bg-black border-t border-red-900 py-12">
-    <div class="max-w-7xl mx-auto px-4 text-gray-400 space-y-2 text-center">
+    <div class="max-w-7xl mx-auto px-4 text-gray-400 space-y-6 text-center">
       <p>© 2025 Moore AI. All rights reserved.</p>
-      <p>Follow us on LinkedIn | Twitter | GitHub</p>
+      <p>
+        <a href="https://www.linkedin.com/in/zach-moore-aa0535332/" class="hover:text-red-400">LinkedIn</a> |
+        <a href="#" class="hover:text-red-400">Twitter</a> |
+        <a href="https://github.com/Zach-A-Moore" class="hover:text-red-400">GitHub</a>
+      </p>
+      <p>19 8th St S PMB 514<br>Fargo, ND 58103</p> <!-- added address -->
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <script>
+    document.getElementById('menu-toggle').onclick = () => {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('hidden');
+    };
+  </script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+  lucide.createIcons();
+</script>
+
 </body>
 </html>
