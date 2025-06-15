@@ -1,0 +1,27 @@
+<!-- ok hear me out, this is gonna be strange, but having an FAQ on a business page is gonna be super important, alot of people wont be asking questions directly so we will try to give them what they wanna hear in the FAQ, will explain more later-->
+
+<!-- templates/faq.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-20 bg-black text-center">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+    <div class="text-left space-y-8">
+      <div>
+        <h3 class="text-xl font-semibold text-red-400 mb-2">What industries do you specialize in?</h3>
+        <p class="text-gray-300">We’ve worked across retail, healthcare, finance, logistics, and more. The core AI principles apply—our job is learning your business.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold text-red-400 mb-2">How long do projects take?</h3>
+        <p class="text-gray-300">Small solutions can be delivered in a few weeks. Larger engagements vary based on scope—we always work iteratively.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold text-red-400 mb-2">Do you offer post-project support?</h3>
+        <p class="text-gray-300">Yes! We can help maintain, monitor, and iterate on your AI system once it’s live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

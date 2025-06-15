@@ -1,0 +1,30 @@
+<!-- This page introduces our team, real faces, real talent. it's up to you how you wanna go forward with this, we can keep it hidden for now. -->
+
+<!-- templates/team.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<section class="py-20 bg-gray-900 text-center">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-white mb-6">Meet the Team</h2>
+    <p class="text-gray-300 mb-12">We’re a crew of engineers, researchers, and consultants passionate about making AI work for real people.</p>
+    <div class="grid md:grid-cols-3 gap-8">
+      {% for person in [
+        {"initials": "ZM", "name": "Zachary Moore", "title": "CEO & Founder", "desc": "Enterprise AI expert and visionary leader."},
+        {"initials": "SJ", "name": "Sarah Johnson", "title": "CTO", "desc": "Leads our tech roadmap and research."},
+        {"initials": "MC", "name": "Michael Chen", "title": "Lead Data Scientist", "desc": "10+ years building scalable ML models."}
+      ] %}
+      <div class="bg-gray-800 p-6 rounded-xl border border-red-800">
+        <div class="w-24 h-24 mx-auto mb-4 flex items-center justify-center rounded-full bg-red-600 text-2xl text-white font-bold">
+          {{ person.initials }}
+        </div>
+        <h3 class="text-xl font-semibold text-white">{{ person.name }}</h3>
+        <p class="text-red-400 mb-2">{{ person.title }}</p>
+        <p class="text-gray-300 text-sm">{{ person.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
