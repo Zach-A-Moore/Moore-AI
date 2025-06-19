@@ -3,13 +3,18 @@
 #  It's clean, and fastr for a company site.
 
 
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, get_flashed_messages, render_template, request, redirect, flash
+from pprint import pprint
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'moore-ai-secret'
 
 @app.route('/')
 def index():
+    msgs = get_flashed_messages(True) #returns list[tuple[str, str]]
+    if len(msgs) > 0:
+        pprint( msgs)
+    
     return render_template('index.html')
 
 @app.route('/about')
@@ -47,15 +52,15 @@ def contact():
     flash('Your message has been received!', 'success')
     return redirect('/')
 
-
-@app.route('/subscribe', methods=['POST'])
-def subscribe():
-    email = request.form.get('email')
-    with open('subscribers.txt', 'a') as f:
-        if email:
-            f.write(email + '\n')
-    flash("You're subscribed!", "success")
-    return redirect('/')
+# Currently not being used. 
+# @app.route('/subscribe', methods=['POST'])
+# def subscribe():
+#     email = request.form.get('email')
+#     with open('subscribers.txt', 'a') as f:
+#         if email:
+#             f.write(email + '\n')
+#     flash("You're subscribed!", "success")
+#     return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
