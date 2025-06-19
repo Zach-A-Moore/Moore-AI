@@ -5,9 +5,30 @@
 
 from flask import Flask, get_flashed_messages, render_template, request, redirect, flash
 from pprint import pprint
+import csv
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'moore-ai-secret'
+
+
+def write_to_csv(name, email, message, filepath="data.csv"):
+    file_exists = os.path.isfile(filepath)
+
+    with open(filepath, mode='a', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['name', 'email', 'message']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        # Write header only if file is new
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerow({
+            'name': name,
+            'email': email,
+            'message': message
+        })
+
 
 @app.route('/')
 def index():
@@ -47,10 +68,16 @@ def contact():
     name = request.form.get('name')
     email = request.form.get('email')
     message = request.form.get('message')
+    write_to_csv(name, email, message)
     # You could save this, email it, or log it
     # NOTE: try to log this for future reference
     flash('Your message has been received!', 'success')
     return redirect('/')
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static/img', 'favicon.ico', mimetype='image/png')
+
 
 # Currently not being used. 
 # @app.route('/subscribe', methods=['POST'])
