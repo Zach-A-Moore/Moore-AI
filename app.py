@@ -6,12 +6,14 @@
 from flask import Flask, get_flashed_messages, render_template, request, redirect, flash
 from pprint import pprint
 import smtplib
+from dotenv import load_dotenv
 from email.mime.text import MIMEText
 import csv
 import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'moore-ai-secret'
+load_dotenv()
 
 
 def write_to_csv(name, email, message, filepath="data.csv"):
