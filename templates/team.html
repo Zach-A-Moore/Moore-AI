@@ -10,19 +10,19 @@
     <p class="text-gray-300 mb-12">We’re a crew of engineers, researchers, and consultants passionate about making AI work for real people.</p>
     <div class="grid md:grid-cols-3 gap-8">
       {% for person in [
-        {"initials": "ZM", "name": "Zachary Moore", "title": "CEO & Founder", "desc": "Enterprise AI expert and visionary leader."},
-        {"initials": "SJ", "name": "Sarah Johnson", "title": "CTO", "desc": "Leads our tech roadmap and research."},
-        {"initials": "MC", "name": "Michael Chen", "title": "Lead Data Scientist", "desc": "10+ years building scalable ML models."}
-      ] %}
-      <div class="bg-gray-800 p-6 rounded-xl border border-red-800">
-        <div class="w-24 h-24 mx-auto mb-4 flex items-center justify-center rounded-full bg-red-600 text-2xl text-white font-bold">
-          {{ person.initials }}
-        </div>
-        <h3 class="text-xl font-semibold text-white">{{ person.name }}</h3>
-        <p class="text-red-400 mb-2">{{ person.title }}</p>
-        <p class="text-gray-300 text-sm">{{ person.desc }}</p>
-      </div>
-      {% endfor %}
+      {"img": "Zach.jpg", "name": "Zachary Moore", "title": "CEO & Founder", "desc": "Enterprise AI expert and visionary leader."},
+      {"img": "Laween.png", "name": "Laween Al-Sulaivany", "title": "CTO", "desc": "Leads our tech roadmap and research."},
+      {"img": "Judah.jpeg", "name": "Juda Nava", "title": "Project Leader", "desc": "Experience in project management"}
+    ] %}
+    <div class="bg-gray-800 p-6 rounded-xl border border-red-800">
+      <img src="{{ url_for('static', filename='img/' ~ person.img) }}"
+          alt="{{ person.name }}"
+          class="w-24 h-24 mx-auto mb-4 rounded-full object-cover border-4 border-red-600 shadow-lg">
+      <h3 class="text-xl font-semibold text-white">{{ person.name }}</h3>
+      <p class="text-red-400 mb-2">{{ person.title }}</p>
+      <p class="text-gray-300 text-sm">{{ person.desc }}</p>
+    </div>
+    {% endfor %}
     </div>
   </div>
 </section>

@@ -20,7 +20,7 @@
   <header class="bg-black shadow-lg border-b border-red-900">
     <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
 <div class="flex items-center space-x-3 pr-4">
-  <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo" class="w-14 h-14 object-contain"> <!-- logo placeholder, enlarged and aligned -->
+  <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo" class="w-20 h-20 object-contain"> <!-- logo placeholder, enlarged and aligned -->
   <h1 class="text-3xl font-bold text-red-500" style="font-family: 'Ardela Edge', sans-serif;">Moore AI</h1>
 </div>
 
@@ -30,7 +30,7 @@
         </svg>
       </button>
       <nav id="main-nav" class="hidden md:flex space-x-4 text-sm font-bold text-white">
-{% for label, path in [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('Projects', '/projects'), ('Testimonials', '/testimonials'), ('FAQ', '/faq')] %}
+{% for label, path in [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('FAQ', '/faq')] %}
   <a href="{{ path }}" class="{% if request.path == path %}bg-red-700 text-white px-3 py-1 rounded-md{% else %}hover:text-red-400 text-white{% endif %}">{{ label }}</a>
   <span class="text-red-500 font-bold">|</span> <!-- separator between every item -->
 {% endfor %}
@@ -58,7 +58,7 @@
       <p>© 2025 Moore AI. All rights reserved.</p>
       <p>
         <a href="https://www.linkedin.com/in/zach-moore-aa0535332/" class="hover:text-red-400">LinkedIn</a> |
-        <a href="#" class="hover:text-red-400">Twitter</a> |
+        <!-- <a href="#" class="hover:text-red-400">Twitter</a> | -->
         <a href="https://github.com/Zach-A-Moore" class="hover:text-red-400">GitHub</a>
       </p>
       <p>19 8th St S PMB 514<br>Fargo, ND 58103</p> <!-- added address -->
