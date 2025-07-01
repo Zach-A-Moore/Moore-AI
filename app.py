@@ -16,24 +16,6 @@ app.config['SECRET_KEY'] = 'moore-ai-secret'
 load_dotenv()
 
 
-def write_to_csv(name, email, message, filepath="data.csv"):
-    file_exists = os.path.isfile(filepath)
-
-    with open(filepath, mode='a', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['name', 'email', 'message']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-        # Write header only if file is new
-        if not file_exists:
-            writer.writeheader()
-
-        writer.writerow({
-            'name': name,
-            'email': email,
-            'message': message
-        })
-
-
 @app.route('/')
 def index():
     msgs = get_flashed_messages(True) #returns list[tuple[str, str]]
@@ -187,6 +169,24 @@ def send_email_debug(name, sender, message_body, subject="message from mooreai.n
         smtp_server.sendmail(recipients[0], recipients, msg.as_string())
     # Print a message to console after successfully sending the email.
     print("Message sent!")
+
+def write_to_csv(name, email, message, filepath="data.csv"):
+    file_exists = os.path.isfile(filepath)
+
+    with open(filepath, mode='a', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['name', 'email', 'message']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        # Write header only if file is new
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerow({
+            'name': name,
+            'email': email,
+            'message': message
+        })
+
 
 # Currently not being used. 
 # @app.route('/subscribe', methods=['POST'])
