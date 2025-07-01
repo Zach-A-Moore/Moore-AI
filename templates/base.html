@@ -19,24 +19,29 @@
 
   <header class="bg-black shadow-lg border-b border-red-900">
     <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-<div class="flex items-center space-x-3 pr-4">
-  <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo" class="w-20 h-20 object-contain"> <!-- logo placeholder, enlarged and aligned -->
-  <h1 class="text-3xl font-bold text-red-500" style="font-family: 'Ardela Edge', sans-serif;">Moore AI</h1>
-</div>
+<a href="/" class="flex items-center space-x-3 pr-4 group">
+  <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo" class="w-20 h-20 object-contain group-hover:opacity-80 transition-opacity duration-200">
+  <h1 class="text-3xl font-bold text-red-500 group-hover:text-red-400" style="font-family: 'Ardela Edge', sans-serif;">Moore AI</h1>
+</a>
 
       <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-red-400">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
-      <nav id="main-nav" class="hidden md:flex space-x-4 text-sm font-bold text-white">
-{% for label, path in [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('FAQ', '/faq')] %}
-  <a href="{{ path }}" class="{% if request.path == path %}bg-red-700 text-white px-3 py-1 rounded-md{% else %}hover:text-red-400 text-white{% endif %}">{{ label }}</a>
-  <span class="text-red-500 font-bold">|</span> <!-- separator between every item -->
-{% endfor %}
-<a href="/#contact" class="hover:text-red-400 text-white">Contact</a>
-
-      </nav>
+      <nav id="main-nav" class="hidden md:flex flex-col md:flex-row absolute md:static bg-black md:bg-transparent right-4 top-24 z-50 p-4 rounded-md shadow-lg md:shadow-none">
+  <div class="flex flex-col md:flex-row text-sm font-bold text-white space-y-2 md:space-y-0">
+    {% set nav_items = [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('FAQ', '/faq'), ('Contact', '/#contact')] %}
+    {% for label, path in nav_items %}
+      {% if not loop.first %}
+        <span class="hidden md:inline text-red-500 font-bold px-2">|</span>
+      {% endif %}
+      <a href="{{ path }}" class="text-white {% if request.path == path %}bg-red-700 px-3 py-1 rounded-md{% else %}hover:text-red-400{% endif %}">
+        {{ label }}
+      </a>
+    {% endfor %}
+  </div>
+</nav>
     </div>
   </header>
 

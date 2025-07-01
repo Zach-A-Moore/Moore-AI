@@ -40,3 +40,7 @@ input:focus, textarea:focus {
 .text-accent {
   color: #ea3f44; 
 }
+
+#main-nav {
+  transition: all 0.3s ease;
+}
