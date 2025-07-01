@@ -3,33 +3,17 @@
 #  It's clean, and fastr for a company site.
 
 
-from flask import Flask, get_flashed_messages, render_template, request, redirect, flash
+from flask import Flask, get_flashed_messages, render_template, request, redirect, flash, send_from_directory
 from pprint import pprint
 import smtplib
+from dotenv import load_dotenv
 from email.mime.text import MIMEText
 import csv
 import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'moore-ai-secret'
-
-
-def write_to_csv(name, email, message, filepath="data.csv"):
-    file_exists = os.path.isfile(filepath)
-
-    with open(filepath, mode='a', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['name', 'email', 'message']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-        # Write header only if file is new
-        if not file_exists:
-            writer.writeheader()
-
-        writer.writerow({
-            'name': name,
-            'email': email,
-            'message': message
-        })
+load_dotenv()
 
 
 @app.route('/')
@@ -71,7 +55,10 @@ def contact():
     email = request.form.get('email')
     message = request.form.get('message')
 
-    send_email(name, email, message)
+    send_email2(name, email, message)
+    send_email_debug(name, email, message) # back up 2
+    write_to_csv(name, email, message) # back up 3
+
 
     flash('Your message has been sent to Zachary!', 'success')
     return redirect('/')
@@ -133,6 +120,72 @@ def send_email(name, sender_email, message_body):
         print("Email sent successfully.")
     except Exception as e:
         print("Failed to send email:", e)
+
+
+def send_email2(name, sender, message_body, subject="message from mooreai.net"):
+    password = os.getenv("EMAIL_APP_PASSWORD")
+    recipients = ["zacharyalexmoore1@gmail.com"]
+
+    body = f"From: {name} <{sender}>\n\n{message_body}"
+
+    # Create a MIMEText object with the body of the email.
+    msg = MIMEText(body)
+    # Set the subject of the email.
+    msg['Subject'] = subject
+    # Set the sender's email.
+    msg['From'] = sender
+    # Join the list of recipients into a single string separated by commas.
+    msg['To'] = ', '.join(recipients)
+   
+    # Connect to Gmail's SMTP server using SSL.
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        # Login to the SMTP server using the sender's credentials.
+        smtp_server.login(recipients[0], password)
+        # Send the email. The sendmail function requires the sender's email, the list of recipients, and the email message as a string.
+        smtp_server.sendmail(recipients[0], recipients, msg.as_string())
+    # Print a message to console after successfully sending the email.
+    print("Message sent!")
+
+def send_email_debug(name, sender, message_body, subject="message from mooreai.net"):
+    password = os.getenv("EMAIL_APP_DEGUG_PWD")
+    recipients = ["judahnava02@gmail.com"]
+
+    body = f"From: {name} <{sender}>\n\n{message_body}"
+
+    # Create a MIMEText object with the body of the email.
+    msg = MIMEText(body)
+    # Set the subject of the email.
+    msg['Subject'] = subject
+    # Set the sender's email.
+    msg['From'] = sender
+    # Join the list of recipients into a single string separated by commas.
+    msg['To'] = ', '.join(recipients)
+   
+    # Connect to Gmail's SMTP server using SSL.
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        # Login to the SMTP server using the sender's credentials.
+        smtp_server.login(recipients[0], password)
+        # Send the email. The sendmail function requires the sender's email, the list of recipients, and the email message as a string.
+        smtp_server.sendmail(recipients[0], recipients, msg.as_string())
+    # Print a message to console after successfully sending the email.
+    print("Message sent!")
+
+def write_to_csv(name, email, message, filepath="data.csv"):
+    file_exists = os.path.isfile(filepath)
+
+    with open(filepath, mode='a', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['name', 'email', 'message']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        # Write header only if file is new
+        if not file_exists:
+            writer.writeheader()
+
+        writer.writerow({
+            'name': name,
+            'email': email,
+            'message': message
+        })
 
 
 # Currently not being used. 
