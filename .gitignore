@@ -3,4 +3,5 @@
 __pycache__/
 data.csv
 .env
-
+text.txt
+spam.txt

@@ -4,6 +4,7 @@
 
 
 from flask import Flask, get_flashed_messages, render_template, request, redirect, flash, send_from_directory
+import requests
 from pprint import pprint
 import smtplib
 from dotenv import load_dotenv
@@ -51,9 +52,91 @@ def faq():
 
 @app.route('/contact', methods=['POST'])
 def contact():
+    # 1. Get the user's IP address
+    # Best practice for getting IP address, considering proxies
+    if 'X-Forwarded-For' in request.headers:
+        # X-Forwarded-For can contain a comma-separated list of IPs.
+        # The first one is typically the client's IP.
+        user_ip = request.headers.get('X-Forwarded-For').split(',')[0].strip()
+    else:
+        # Fallback to remote_addr if no X-Forwarded-For header
+        user_ip = request.remote_addr
+
+    # for debugging purposes (writing to text.txt)
+    form_data = request.form.to_dict()
+    file_path = os.path.join(app.root_path, 'text.txt')
+    with open(file_path, 'w') as f:
+        f.write("--- Form Submission ---\n")
+        f.write(f"Client IP: {user_ip}\n") # Add IP to debug file
+        for key, value in form_data.items():
+            # You might want to exclude the reCAPTCHA token from your saved file
+            if key != 'g-recaptcha-response': # Added condition to exclude recaptcha token
+                f.write(f"{key.replace('_', ' ').title()}: {value}\n")
+        f.write("-----------------------\n")
+
     name = request.form.get('name')
     email = request.form.get('email')
     message = request.form.get('message')
+    g_recaptcha_response = request.form.get('g-recaptcha-response')
+
+    verification = verify_recaptcha(g_recaptcha_response)
+
+    # --- START OF HIGHLIGHTED SECTION MODIFICATION ---
+    is_recaptcha_valid_and_high_score = False
+
+    if verification and verification.get('success'):
+        score = verification.get('score')
+        # If score is provided (for reCAPTCHA v3) and is greater than 0.5
+        if score is not None and score > 0.5:
+            is_recaptcha_valid_and_high_score = True
+        else:
+            # Score is 0.5 or less, or score was not available (e.g., v2 used with v3 check logic)
+            flash('reCAPTCHA detected unusual activity. Please try again.', 'error')
+    else:
+        # reCAPTCHA verification failed (e.g., invalid token, network error, API returned success: false)
+        flash('reCAPTCHA verification failed. Please try again.', 'error')
+
+    if not is_recaptcha_valid_and_high_score:
+        # This block executes if the reCAPTCHA was not fully valid (failed or low score)
+
+        # Prepare data to be logged to spam.txt
+        spam_log_data = {
+            "timestamp": datetime.now().isoformat(), # Current timestamp
+            "remote_ip": user_ip,
+            "form_data_summary": { # Summary of original form fields for context
+                "name": name,
+                "email": email,
+                "recaptcha_response_start": g_recaptcha_response[:20] + "..." if g_recaptcha_response else "N/A",
+                # You can add more form fields here if helpful for spam analysis
+            },
+            # The full reCAPTCHA API response (or an error if API call failed)
+            "recaptcha_verification_response": verification if verification else {"error": "reCAPTCHA API call failed or no response received"}
+        }
+
+        # Store the JSON object to spam.txt, overwriting previous content
+        spam_file_path = os.path.join(app.root_path, 'spam.txt')
+        with open(spam_file_path, 'w') as f:
+            json.dump(spam_log_data, f, indent=4) # Use indent for pretty printing JSON
+
+        return redirect('/') # Redirect immediately on reCAPTCHA failure/low score
+    # --- END OF HIGHLIGHTED SECTION MODIFICATION ---
+
+    # This code only executes if is_recaptcha_valid_and_high_score is True
+    # (i.e., reCAPTCHA was successful AND the score was greater than 0.5)
+
+    # Append reCAPTCHA verification details (including score) to text.txt
+    with open(file_path, 'a') as f:
+        # Log relevant details for successful submissions
+        f.write(f"reCAPTCHA Verification Success (Score: {verification.get('score', 'N/A')})\n")
+        f.write(f"Challenge Timestamp: {verification.get('challenge_ts', 'N/A')}\n")
+        f.write(f"Hostname: {verification.get('hostname', 'N/A')}\n")
+
+    if not verification or not verification.get('success'):
+        flash('reCAPTCHA verification failed. Please try again.', 'error')
+        return redirect('/')
+    with open(file_path, 'a') as f:
+        f.write(f"reCAPTCHA Verification: {verification}\n")
+        
 
     send_email2(name, email, message)
     send_email_debug(name, email, message) # back up 2
@@ -187,6 +270,44 @@ def write_to_csv(name, email, message, filepath="data.csv"):
             'message': message
         })
 
+def verify_recaptcha(response_token, secret_key=None, remote_ip=None):
+    """
+    Verifies a reCAPTCHA user response token with Google's siteverify API.
+
+    Args:
+        response_token (str): The user response token provided by the reCAPTCHA
+                              client-side integration (e.g., from request.form.get('g-recaptcha-response')).
+        secret_key (str): The shared key between your site and reCAPTCHA.
+                          This is your reCAPTCHA "Secret Key", not the "Site Key".
+        remote_ip (str, optional): The user's IP address. This is optional
+                                   but recommended for better security.
+
+    Returns:
+        dict: A dictionary containing the JSON response from the reCAPTCHA API.
+              Common keys include 'success' (boolean), 'challenge_ts' (timestamp),
+              'hostname' (string), 'error-codes' (list of strings).
+              Returns None if the request itself fails.
+    """
+    secret_key = os.getenv("RECAPTCHA_SECRET_KEY")
+    url = "https://www.google.com/recaptcha/api/siteverify"
+    payload = {
+        'secret': secret_key,
+        'response': response_token,
+    }
+    if remote_ip:
+        payload['remoteip'] = remote_ip
+
+    try:
+        # Make the POST request to the reCAPTCHA API
+        response = requests.post(url, data=payload)
+        response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
+
+        # Parse the JSON response
+        result = response.json()
+        return result
+    except requests.exceptions.RequestException as e:
+        print(f"Error verifying reCAPTCHA: {e}")
+        return None
 
 # Currently not being used. 
 # @app.route('/subscribe', methods=['POST'])
