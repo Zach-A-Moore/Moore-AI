@@ -10,16 +10,22 @@
     <p class="text-brand-cream mb-12">We're a crew of engineers, researchers, and consultants passionate about making AI work for real people.</p>
     <div class="grid md:grid-cols-3 gap-8">
       {% for person in [
-        {"img": "Zach.jpg", "name": "Zachary Moore", "title": "CEO & Founder", "desc": "Enterprise AI expert and visionary leader.", "class": "zach"},
-        {"img": "Laween.png", "name": "Laween Al-Sulaivany", "title": "CTO", "desc": "Leads our tech roadmap and research.", "class": ""},
-        {"img": "Judah.jpeg", "name": "Juda Nava", "title": "Project Leader", "desc": "Experience in project management", "class": "judah"}
+        {"img": "Zach.jpg", "name": "Zachary Moore", "title": "CEO & Founder", "desc": "Enterprise AI expert and visionary leader.", "class": "zach", "github": "Zach-A-Moore"},
+        {"img": "Laween.png", "name": "Laween Al-Sulaivany", "title": "CTO", "desc": "Leads our tech roadmap and research.", "class": "", "github": "laween-alsulaivany"},
+        {"img": "Judah.jpeg", "name": "Juda Nava", "title": "Project Leader", "desc": "Experience in project management", "class": "judah", "github": "judahn02"}
       ] %}
 
     <div class="service-card p-8 rounded-xl card-hover">
-      <img src="{{ url_for('static', filename='img/' ~ person.img) }}"
-          alt="{{ person.name }}"
-          class="team-photo mx-auto mb-6 rounded-full object-cover {{ person.class }}">
-      <h3 class="text-2xl font-semibold text-brand-light">{{ person.name }}</h3>
+      <a href="https://github.com/{{ person.github }}" target="_blank" rel="noopener noreferrer" class="github-link">
+        <img src="{{ url_for('static', filename='img/' ~ person.img) }}"
+            alt="{{ person.name }}"
+            class="team-photo mx-auto mb-6 rounded-full object-cover {{ person.class }}">
+      </a>
+      <h3 class="text-2xl font-semibold text-brand-light">
+        <a href="https://github.com/{{ person.github }}" target="_blank" rel="noopener noreferrer" class="github-link">
+          {{ person.name }}
+        </a>
+      </h3>
       <p class="text-brand-red mb-3 font-semibold">{{ person.title }}</p>
       <p class="text-brand-cream">{{ person.desc }}</p>
     </div>
