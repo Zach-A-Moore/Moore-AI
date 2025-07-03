@@ -1,5 +1,5 @@
 # Moore AI - Flask Web Application
-# A professional AI consulting company website
+# An AI consulting company website
 
 from flask import Flask, render_template, request, redirect, flash, send_from_directory
 import requests
