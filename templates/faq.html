@@ -1,27 +1,167 @@
-<!-- ok hear me out, this is gonna be strange, but having an FAQ on a business page is gonna be super important, alot of people wont be asking questions directly so we will try to give them what they wanna hear in the FAQ, will explain more later-->
-
 <!-- templates/faq.html -->
 {% extends "base.html" %}
 {% block content %}
 
-<section class="py-20 bg-black text-center">
+<section class="py-20 bg-primary-gradient">
   <div class="max-w-4xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-white mb-6">Frequently Asked Questions</h2>
-    <div class="text-left space-y-8">
-      <div>
-        <h3 class="text-xl font-semibold text-red-400 mb-2">What industries do you specialize in?</h3>
-        <p class="text-gray-300">We’ve worked across retail, healthcare, finance, logistics, and more. The core AI principles apply—our job is learning your business.</p>
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-brand-light mb-6">Frequently Asked Questions</h2>
+      <p class="text-lg text-brand-cream">Get answers to common questions about our AI consulting services.</p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- FAQ Item 1 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">What types of AI solutions do you develop?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We specialize in custom machine learning models, natural language processing, computer vision, predictive analytics, automation systems, and AI strategy consulting. Our solutions are tailored to your specific business needs and industry requirements.
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-400 mb-2">How long do projects take?</h3>
-        <p class="text-gray-300">Small solutions can be delivered in a few weeks. Larger engagements vary based on scope—we always work iteratively.</p>
+
+      <!-- FAQ Item 2 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">How long does a typical AI project take?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Project timelines vary based on complexity and scope. Simple automation projects may take 4-8 weeks, while comprehensive AI systems can take 3-6 months. We provide detailed timelines during our initial consultation and keep you updated throughout the process.
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="text-xl font-semibold text-red-400 mb-2">Do you offer post-project support?</h3>
-        <p class="text-gray-300">Yes! We can help maintain, monitor, and iterate on your AI system once it’s live.</p>
+
+      <!-- FAQ Item 3 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">Do you work with small businesses or just enterprises?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We work with businesses of all sizes, from startups to Fortune 500 companies. Our approach is scalable and we tailor our solutions to fit your budget and growth objectives. Every project gets the same level of expertise and attention to detail.
+          </div>
+        </div>
       </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">What data do you need to get started?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            The data requirements depend on your specific project goals. We can work with structured data (databases, spreadsheets), unstructured data (text, images, audio), or help you develop a data collection strategy. We'll assess your current data landscape during our consultation.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">How do you ensure data security and privacy?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Data security is our top priority. We implement end-to-end encryption, secure data processing pipelines, and strict access controls. We're compliant with industry standards like GDPR and CCPA, and can work within your existing security frameworks.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 6 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">Do you provide ongoing support after deployment?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, we offer comprehensive support packages including monitoring, maintenance, model retraining, and system optimization. AI systems require ongoing attention to maintain peak performance, and we're here to ensure your investment continues to deliver value.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 7 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">What's your pricing structure?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            We offer flexible pricing models including fixed-price projects, retainer agreements, and equity partnerships for startups. Pricing depends on project scope, complexity, and timeline. We provide detailed quotes after understanding your specific requirements.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 8 -->
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <h3 class="text-lg font-semibold text-brand-light">Can you integrate AI with our existing systems?</h3>
+          <svg class="faq-icon w-6 h-6 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Absolutely. We specialize in seamless integration with existing infrastructure. Whether you're using cloud platforms, on-premise systems, or hybrid environments, we design AI solutions that work with your current technology stack without disruption.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="text-center mt-12">
+      <p class="text-brand-cream mb-6">Still have questions?</p>
+      <a href="/#contact" class="btn-primary inline-flex items-center justify-center">
+        Get in Touch
+        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>
+
+<script>
+function toggleFAQ(element) {
+  const answer = element.nextElementSibling;
+  const icon = element.querySelector('.faq-icon');
+  
+  // Close all other FAQ items
+  document.querySelectorAll('.faq-answer').forEach(item => {
+    if (item !== answer) {
+      item.classList.remove('active');
+      item.previousElementSibling.querySelector('.faq-icon').classList.remove('rotated');
+    }
+  });
+  
+  // Toggle current FAQ item
+  answer.classList.toggle('active');
+  icon.classList.toggle('rotated');
+}
+</script>
 
 {% endblock %}
