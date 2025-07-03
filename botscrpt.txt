@@ -1,7 +1,0 @@
-curl -X POST \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "name=John+Doe" \
-  -d "email=john.doe%40example.com" \
-  -d "message=This+is+a+test+message+from+curl." \
-  -d "g-recaptcha-response=6LcEwXQrAAAAALKIQYhgVGoLk8b849ynUZ-c3ZDX" \
-  https://mooreai.net/contact
