@@ -3,76 +3,205 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- Pop Up Messages Section -->
- {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li style="color: green;">{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
+<!-- Flash Messages with Professional Styling -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="fixed top-6 right-6 space-y-4 z-50">
+      {% for category, message in messages %}
+        <div class="p-4 rounded-lg shadow-lg border-l-4 {% if category == 'success' %}bg-green-900 border-green-500 text-green-100{% else %}bg-red-900 border-red-500 text-red-100{% endif %} max-w-sm">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              {% if category == 'success' %}
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              {% else %}
+                <svg class="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+              {% endif %}
+            </div>
+            <div class="ml-3">
+              <p class="text-sm font-medium">{{ message }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
 <!-- Hero Section -->
-<section class="py-20 bg-gradient-to-br from-black via-gray-900 to-red-900 text-center">
-  <div class="max-w-4xl mx-auto px-4">
-    <h1 class="text-5xl font-bold text-white mb-6" style="font-family: 'Ardela Edge', sans-serif;">AI Solutions for the <span class="text-red-500">Future</span></h1>
-    <p class="text-xl text-gray-300 mb-8">Moore AI delivers cutting-edge artificial intelligence consulting services to transform your business operations and drive innovation.</p>
-    <div class="flex justify-center gap-4">
-      <a href="#contact" class="bg-red-600 px-6 py-3 rounded text-white font-semibold hover:bg-red-700">Start Your AI Journey</a>
-      <a href="/services" class="border border-red-500 px-6 py-3 rounded text-red-400 font-semibold hover:bg-red-900">Learn More</a>
+<section class="py-20 bg-primary-gradient text-center relative overflow-hidden">
+  <!-- Animated Background Pattern -->
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute inset-0" style="background: radial-gradient(circle at 20% 20%, rgba(190, 30, 45, 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(131, 25, 37, 0.4) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(190, 30, 45, 0.2) 0%, transparent 50%);"></div>
+  </div>
+  
+  <div class="max-w-4xl mx-auto px-4 relative z-10">
+    <h1 class="text-5xl md:text-6xl font-bold text-brand-light mb-6 font-ardela leading-tight">
+      AI Solutions for the <span class="text-brand-red animate-pulse">Future</span>
+    </h1>
+    <p class="text-xl md:text-2xl text-brand-cream mb-8 max-w-3xl mx-auto leading-relaxed">
+      Moore AI delivers cutting-edge artificial intelligence consulting services to transform your business operations and drive innovation.
+    </p>
+    
+    <!-- Enhanced CTA Buttons -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+      <a href="#contact" class="btn-primary inline-flex items-center justify-center group">
+        Start Your AI Journey
+        <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+      <a href="/services" class="btn-secondary inline-flex items-center justify-center">
+        Explore Services
+      </a>
+    </div>
+    
+    <!-- Trust Indicators -->
+    <div class="flex flex-wrap justify-center items-center gap-8 text-brand-cream text-sm">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        Enterprise Ready
+      </div>
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd"/>
+        </svg>
+        Custom Solutions
+      </div>
+      <div class="flex items-center">
+        <svg class="w-5 h-5 text-brand-red mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+        Expert Team
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Services Section -->
-<section class="py-20 bg-gradient-to-bl from-red-900 via-gray-900 to-black text-center"> <!-- mirrored gradient -->
-
+<section class="py-20 bg-secondary-gradient text-center">
   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-white mb-6">Our Services</h2>
-    <p class="text-lg text-gray-300 mb-12">Helping businesses integrate AI, machine learning, and data science into their workflows.</p>
+    <h2 class="text-4xl font-bold text-brand-light mb-6">Our Services</h2>
+    <p class="text-lg text-brand-cream mb-12">Helping businesses integrate AI, machine learning, and data science into their workflows.</p>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="p-6 bg-gray-900 rounded-lg border border-red-800 hover:border-red-600">
-        <h3 class="text-xl text-white font-semibold mb-3">AI Strategy & Consulting</h3>
-        <p class="text-gray-300">Tailored guidance on AI adoption, readiness, and business alignment.</p>
+      <div class="service-card p-6 rounded-lg card-hover">
+        <h3 class="text-xl text-brand-light font-semibold mb-3">AI Strategy & Consulting</h3>
+        <p class="text-brand-cream">Tailored guidance on AI adoption, readiness, and business alignment.</p>
       </div>
-      <div class="p-6 bg-gray-900 rounded-lg border border-red-800 hover:border-red-600">
-        <h3 class="text-xl text-white font-semibold mb-3">Machine Learning Solutions</h3>
-        <p class="text-gray-300">Custom ML models that solve your specific business challenges.</p>
+      <div class="service-card p-6 rounded-lg card-hover">
+        <h3 class="text-xl text-brand-light font-semibold mb-3">Machine Learning Solutions</h3>
+        <p class="text-brand-cream">Custom ML models that solve your specific business challenges.</p>
       </div>
-      <div class="p-6 bg-gray-900 rounded-lg border border-red-800 hover:border-red-600">
-        <h3 class="text-xl text-white font-semibold mb-3">Data Analytics & Insights</h3>
-        <p class="text-gray-300">Transform your raw data into actionable business intelligence.</p>
+      <div class="service-card p-6 rounded-lg card-hover">
+        <h3 class="text-xl text-brand-light font-semibold mb-3">Data Analytics & Insights</h3>
+        <p class="text-brand-cream">Transform your raw data into actionable business intelligence.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-20 bg-gray-900">
+<section id="contact" class="py-20 bg-tertiary-gradient">
   <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get in Touch</h2>
-    <p class="text-lg text-gray-300 mb-8">Reach out to discuss projects, ideas, or how Moore AI can support your business.</p>
-    <form action="/contact" method="POST" class="grid gap-6" id="contract">
-      <input type="text" name="name" placeholder="Your Name" required class="px-4 py-3 rounded bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-red-500" />
-      <input type="email" name="email" placeholder="Your Email" required class="px-4 py-3 rounded bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-red-500" />
-      <textarea name="message" rows="4" placeholder="Your Message" required class="px-4 py-3 rounded bg-gray-800 border border-gray-700 text-white focus:ring-2 focus:ring-red-500"></textarea>
-      <!-- <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 font-semibold">Send Message</button> -->
-      <button 
-        class="g-recaptcha bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 font-semibold" 
-        data-sitekey="6LcEwXQrAAAAALKIQYhgVGoLk8b849ynUZ-c3ZDX" 
-        data-callback='onSubmit' 
-        data-action='submit'>Send Message</button>
+    <h2 class="text-3xl md:text-4xl font-bold text-brand-light mb-4">Get in Touch</h2>
+    <p class="text-lg text-brand-cream mb-8">Ready to transform your business with AI? Let's discuss your project and explore the possibilities.</p>
+    
+    <form action="/contact" method="POST" class="grid gap-6 relative" id="contact">
+      <div class="grid md:grid-cols-2 gap-6">
+        <input type="text" name="name" placeholder="Your Name" required 
+               class="form-input px-4 py-3 rounded bg-brand-night border border-gray-700 text-brand-light focus:ring-2 focus:ring-brand-red" />
+        <input type="email" name="email" placeholder="Your Email" required 
+               class="form-input px-4 py-3 rounded bg-brand-night border border-gray-700 text-brand-light focus:ring-2 focus:ring-brand-red" />
+      </div>
+      <textarea name="message" rows="4" placeholder="Tell us about your project and AI goals..." required 
+                class="form-input px-4 py-3 rounded bg-brand-night border border-gray-700 text-brand-light focus:ring-2 focus:ring-brand-red"></textarea>
+      
+      <button type="submit" id="submit-btn"
+              class="btn-primary g-recaptcha relative overflow-hidden" 
+              data-sitekey="6LcEwXQrAAAAALKIQYhgVGoLk8b849ynUZ-c3ZDX" 
+              data-callback='onSubmit' 
+              data-action='submit'>
+        <span id="submit-text">Send Message</span>
+        <span id="loading-text" class="hidden">Sending...</span>
+      </button>
     </form>
+    
+    <!-- Contact Info -->
+    <div class="mt-12 grid md:grid-cols-3 gap-8 text-center">
+      <div class="p-4">
+        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <h4 class="text-brand-light font-semibold mb-1">Visit Us</h4>
+        <p class="text-brand-cream text-sm">19 8th St S PMB 514<br>Fargo, ND 58103</p>
+      </div>
+      
+      <div class="p-4">
+        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h4 class="text-brand-light font-semibold mb-1">Email Us</h4>
+        <p class="text-brand-cream text-sm">Response within 24 hours</p>
+      </div>
+      
+      <div class="p-4">
+        <div class="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg class="w-6 h-6 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h4 class="text-brand-light font-semibold mb-1">Fast Response</h4>
+        <p class="text-brand-cream text-sm">Quick project assessment</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
   function onSubmit(token) {
-    document.getElementById("contract").submit();
+    const form = document.getElementById("contact");
+    const submitBtn = document.getElementById("submit-btn");
+    const submitText = document.getElementById("submit-text");
+    const loadingText = document.getElementById("loading-text");
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    submitText.classList.add('hidden');
+    loadingText.classList.remove('hidden');
+    
+    // Submit form
+    form.submit();
   }
+  
+  // Form validation
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact');
+    const inputs = form.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.value.trim() === '') {
+          this.classList.add('border-red-500');
+          this.classList.remove('border-gray-700');
+        } else {
+          this.classList.remove('border-red-500');
+          this.classList.add('border-gray-700');
+        }
+      });
+    });
+  });
 </script>
 
 {% endblock %}
