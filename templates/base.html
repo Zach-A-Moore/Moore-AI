@@ -59,8 +59,8 @@
   <header class="bg-brand-night shadow-lg border-b border-brand-burgundy">
     <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
 <a href="/" class="flex items-center space-x-3 pr-4 group">
-  <img src="{{ url_for('static', filename='svg/12Color_LogoOnly.svg') }}" alt="Moore AI Logo" class="w-20 h-20 object-contain group-hover:opacity-80 transition-opacity duration-200">
-  <h1 class="text-3xl font-bold text-brand-red group-hover:text-brand-burgundy transition-colors duration-200 font-ardela">Moore AI</h1>
+  <img src="{{ url_for('static', filename='svg/12Color_LogoOnly.svg') }}" alt="Moore AI Logo" class="w-16 h-16 object-contain group-hover:opacity-80 transition-opacity duration-200">
+  <h1 class="text-3xl font-bold text-brand-red group-hover:text-brand-burgundy transition-colors duration-200 font-ardela flex items-center">Moore AI</h1>
 </a>
 
       <button id="menu-toggle" class="md:hidden text-brand-light hover:text-brand-red transition-colors duration-200">
@@ -84,7 +84,7 @@
     </div>
   </header>
 
-  <main class="animate-fade-in-up">
+  <main class="animate-fade-in-up page-transition">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="fixed top-6 right-6 space-y-4 z-50">
