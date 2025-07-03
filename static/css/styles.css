@@ -3,7 +3,7 @@
 /* Ardela Edge Local Font */
 @font-face {
   font-family: 'Ardela Edge';
-  src: url('../fonts/ArdelaEdge-Regular.ttf') format('truetype');
+  src: url('../fonts/ArdelaEdge-Regular.otf') format('opentype');
 }
 
 

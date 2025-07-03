@@ -128,7 +128,7 @@
     <h2 class="text-3xl md:text-4xl font-bold text-brand-light mb-4">Get in Touch</h2>
     <p class="text-lg text-brand-cream mb-8">Ready to transform your business with AI? Let's discuss your project and explore the possibilities.</p>
     
-    <form action="/contact" method="POST" class="grid gap-6 relative" id="contact">
+    <form action="/contact" method="POST" class="grid gap-6 relative" id="contact_form">
       <div class="grid md:grid-cols-2 gap-6">
         <input type="text" name="name" placeholder="Your Name" required 
                class="form-input px-4 py-3 rounded bg-brand-night border border-gray-700 text-brand-light focus:ring-2 focus:ring-brand-red" />
@@ -187,7 +187,7 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script>
   function onSubmit(token) {
-    const form = document.getElementById("contact");
+    const form = document.getElementById("contact_form"); // unique for sending email.
     const submitBtn = document.getElementById("submit-btn");
     const submitText = document.getElementById("submit-text");
     const loadingText = document.getElementById("loading-text");
@@ -204,7 +204,7 @@
   
   // Form validation
   document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact');
+    const form = document.getElementById('contact_form'); // unique for sending email.
     const inputs = form.querySelectorAll('input, textarea');
     
     inputs.forEach(input => {
