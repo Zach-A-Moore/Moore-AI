@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #81141f;
+      }
+
+      .cls-2 {
+        fill: #881722;
+      }
+
+      .cls-3 {
+        fill: #891622;
+      }
+
+      .cls-4 {
+        fill: #9a1926;
+      }
+
+      .cls-5 {
+        fill: #4a1114;
+      }
+
+      .cls-6 {
+        fill: #b71e30;
+      }
+
+      .cls-7 {
+        fill: #8d1722;
+      }
+
+      .cls-8 {
+        fill: #b51d2f;
+      }
+
+      .cls-9 {
+        fill: #b71e2f;
+      }
+
+      .cls-10 {
+        fill: #79141e;
+      }
+
+      .cls-11 {
+        fill: #ab1b2c;
+      }
+
+      .cls-12 {
+        fill: #6f131b;
+      }
+
+      .cls-13 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-14 {
+        fill: #a41a2a;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="170.84" y1="261.31" x2="419.63" y2="261.31" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#be1e2d"/>
+      <stop offset="1" stop-color="#831925"/>
+    </linearGradient>
+  </defs>
+  <polygon class="cls-13" points="419.63 374.4 419.63 148.22 374.42 148.22 295.24 305.25 216.07 148.22 170.84 148.22 170.84 374.4 216.07 374.4 216.07 238.69 283.93 374.4 306.54 374.4 374.4 238.69 374.4 374.4 419.63 374.4"/>
+  <rect class="cls-5" x="170.84" y="170.84" width="22.62" height="22.62"/>
+  <rect class="cls-7" x="125.6" y="170.84" width="22.62" height="22.62"/>
+  <rect class="cls-7" x="102.99" y="170.84" width="22.62" height="22.62"/>
+  <rect class="cls-7" x="102.99" y="125.6" width="22.62" height="22.62"/>
+  <rect class="cls-9" x="170.84" y="193.46" width="22.62" height="22.62"/>
+  <rect class="cls-14" x="148.22" y="193.46" width="22.62" height="22.62"/>
+  <rect class="cls-6" x="125.6" y="193.46" width="22.62" height="22.62"/>
+  <rect class="cls-10" x="80.37" y="193.46" width="22.62" height="22.62"/>
+  <rect class="cls-1" x="148.22" y="216.07" width="22.62" height="22.62"/>
+  <rect class="cls-2" x="170.84" y="216.07" width="22.62" height="22.62"/>
+  <rect class="cls-11" x="102.99" y="216.07" width="22.62" height="22.62"/>
+  <rect class="cls-3" x="125.6" y="238.69" width="22.62" height="22.62"/>
+  <rect class="cls-4" x="170.84" y="261.31" width="22.62" height="22.62"/>
+  <rect class="cls-12" x="148.22" y="148.22" width="22.62" height="22.62"/>
+  <rect class="cls-8" x="80.37" y="148.22" width="22.62" height="22.62"/>
+</svg>
