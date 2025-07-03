@@ -7,8 +7,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Moore AI - {{ title if title else 'Home' }}</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  
+  <!-- SEO Meta Tags -->
+  <title>{% if title %}{{ title }} - Moore AI{% else %}Moore AI - AI Consulting & Solutions{% endif %}</title>
+  <meta name="description" content="Moore AI delivers cutting-edge artificial intelligence consulting services. Transform your business with custom AI solutions, machine learning, and strategic AI implementation." />
+  <meta name="keywords" content="AI consulting, artificial intelligence, machine learning, AI solutions, business automation, AI strategy" />
+  <meta name="author" content="Moore AI" />
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Moore AI - AI Consulting & Solutions" />
+  <meta property="og:description" content="Transform your business with cutting-edge artificial intelligence consulting services." />
+  <meta property="og:url" content="https://mooreai.net" />
+  
+  <!-- Stylesheets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'ardela': ['Ardela Edge', 'sans-serif'],
+          },
+          colors: {
+            'brand': {
+              'burgundy': '#831925',
+              'red': '#BE1E2D', 
+              'light': '#EDEDED',
+              'cream': '#F0EADE',
+              'night': '#0A0A0A',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
   <link rel="icon" type="image/ico" href="{{url_for('static', filename='img/favicon.ico')}}" />
   <!-- <script src="https://www.google.com/recaptcha/api.js"></script>
@@ -21,28 +54,28 @@
 </head>
 
 
-<body class="min-h-screen bg-black text-white">
+<body class="min-h-screen bg-brand-night text-brand-light">
 
-  <header class="bg-black shadow-lg border-b border-red-900">
+  <header class="bg-brand-night shadow-lg border-b border-brand-burgundy">
     <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
 <a href="/" class="flex items-center space-x-3 pr-4 group">
-  <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Logo" class="w-20 h-20 object-contain group-hover:opacity-80 transition-opacity duration-200">
-  <h1 class="text-3xl font-bold text-red-500 group-hover:text-red-400" style="font-family: 'Ardela Edge', sans-serif;">Moore AI</h1>
+  <img src="{{ url_for('static', filename='svg/12Color_LogoOnly.svg') }}" alt="Moore AI Logo" class="w-20 h-20 object-contain group-hover:opacity-80 transition-opacity duration-200">
+  <h1 class="text-3xl font-bold text-brand-red group-hover:text-brand-burgundy transition-colors duration-200 font-ardela">Moore AI</h1>
 </a>
 
-      <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-red-400">
+      <button id="menu-toggle" class="md:hidden text-brand-light hover:text-brand-red transition-colors duration-200">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
-      <nav id="main-nav" class="hidden md:flex flex-col md:flex-row absolute md:static bg-black md:bg-transparent right-4 top-24 z-50 p-4 rounded-md shadow-lg md:shadow-none">
-  <div class="flex flex-col md:flex-row text-sm font-bold text-white space-y-2 md:space-y-0">
+      <nav id="main-nav" class="hidden md:flex flex-col md:flex-row absolute md:static bg-brand-night md:bg-transparent right-4 top-24 z-50 p-4 rounded-md shadow-lg md:shadow-none border border-brand-burgundy md:border-none">
+  <div class="flex flex-col md:flex-row text-sm font-bold text-brand-light space-y-2 md:space-y-0">
     {% set nav_items = [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('FAQ', '/faq'), ('Contact', '/#contact')] %}
     {% for label, path in nav_items %}
       {% if not loop.first %}
-        <span class="hidden md:inline text-red-500 font-bold px-2">|</span>
+        <span class="hidden md:inline text-brand-red font-bold px-2">|</span>
       {% endif %}
-      <a href="{{ path }}" class="text-white {% if request.path == path %}bg-red-700 px-3 py-1 rounded-md{% else %}hover:text-red-400{% endif %}">
+      <a href="{{ path }}" class="text-brand-light {% if request.path == path %}bg-brand-burgundy px-3 py-1 rounded-md{% else %}hover:text-brand-red{% endif %} transition-colors duration-200">
         {{ label }}
       </a>
     {% endfor %}
@@ -64,15 +97,14 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="bg-black border-t border-red-900 py-12">
-    <div class="max-w-7xl mx-auto px-4 text-gray-400 space-y-6 text-center">
+  <footer class="bg-brand-night border-t border-brand-burgundy py-12">
+    <div class="max-w-7xl mx-auto px-4 text-brand-cream space-y-6 text-center">
       <p>© 2025 Moore AI. All rights reserved.</p>
       <p>
-        <a href="https://www.linkedin.com/in/zach-moore-aa0535332/" class="hover:text-red-400">LinkedIn</a> |
-        <!-- <a href="#" class="hover:text-red-400">Twitter</a> | -->
-        <a href="https://github.com/Zach-A-Moore" class="hover:text-red-400">GitHub</a>
+        <a href="https://www.linkedin.com/in/zach-moore-aa0535332/" class="hover:text-brand-red transition-colors duration-200">LinkedIn</a> |
+        <a href="https://github.com/Zach-A-Moore" class="hover:text-brand-red transition-colors duration-200">GitHub</a>
       </p>
-      <p>19 8th St S PMB 514<br>Fargo, ND 58103</p> <!-- added address -->
+      <p>19 8th St S PMB 514<br>Fargo, ND 58103</p>
     </div>
   </footer>
 
