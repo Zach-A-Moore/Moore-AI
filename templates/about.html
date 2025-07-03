@@ -1,37 +1,29 @@
-<!-- Th<section class="py-20 bg-primary-gradient text-center">
-  <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-brand-light mb-6">About Moore AI</h2>
-    <p class="text-lg text-brand-cream mb-6">
-      At Moore AI, we believe AI should feel less like hype and more like help. We're a team of practical engineers and strategic thinkers, building real solutions for real businesses. Whether you're automating daily workflows or launching a next-gen product, we bring clarity, speed, and focus to every stage.
-    </p>
-    <p class="text-lg text-brand-cream mb-6">
-      We don't do one-size-fits-all. Every system we build is tailored to your needs, goals, and team. From startups moving fast to enterprises ready to scale, we work side-by-side—not just as developers, but as long-term partners you can trust.
-    </p>
-    <p class="text-brand-cream">
-      Let's build something that actually makes a <span class="text-accent">difference</span>.
-      <br>
-    </p>
-  </div>
-</section>xplain who we are, what we stand for, and what drives Moore AI. It gives visitors confidence in who they’re working with. -->
- <!-- NOTE: its still a work in progress and if we do this, i really want this to be original not just some bullshit story -->
+<!-- This is where we explain who we are, what we stand for, and what drives Moore AI. It gives visitors confidence in who they're working with. -->
+<!-- NOTE: its still a work in progress and if we do this, i really want this to be original not just some bullshit story -->
 
 <!-- templates/about.html -->
 {% extends "base.html" %}
 {% block content %}
 
-<section class="py-20 bg-black text-center">
-  <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-white mb-6">About Moore AI</h2>
-    <p class="text-lg text-gray-300 mb-6">
+<section class="py-20 bg-primary-gradient text-center relative overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-15">
+    <div class="absolute inset-0" style="background: radial-gradient(circle at 30% 70%, rgba(190, 30, 45, 0.3) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(131, 25, 37, 0.3) 0%, transparent 50%);"></div>
+  </div>
+  
+  <div class="max-w-5xl mx-auto px-4 relative z-10">
+    <h2 class="text-4xl font-bold text-brand-light mb-6">About Moore AI</h2>
+    <p class="text-lg text-brand-cream mb-6">
       At Moore AI, we believe AI should feel less like hype and more like help. We're a team of practical engineers and strategic thinkers, building real solutions for real businesses. Whether you're automating daily workflows or launching a next-gen product, we bring clarity, speed, and focus to every stage.
     </p>
-    <p class="text-lg text-gray-300 mb-6">
-      We don’t do one-size-fits-all. Every system we build is tailored to your needs, goals, and team. From startups moving fast to enterprises ready to scale, we work side-by-side, not just as developers, but as long-term partners you can trust.
+    <p class="text-lg text-brand-cream mb-6">
+      We don't do one-size-fits-all. Every system we build is tailored to your needs, goals, and team. From startups moving fast to enterprises ready to scale, we work side-by-side, not just as developers, but as long-term partners you can trust.
     </p>
-    <p class="text-gray-400">
-      Let’s build something that actually makes a <span class="text-accent">difference</span>.
-
-      <br>
+    <p class="text-brand-cream">
+      Let's build something that actually makes a <span class="text-brand-red relative">
+        <span class="relative z-10 animate-pulse-glow">difference</span>
+        <span class="absolute inset-0 bg-gradient-to-r from-brand-red to-brand-burgundy bg-clip-text text-transparent opacity-70"></span>
+      </span>.
     </p>
   </div>
 </section>
