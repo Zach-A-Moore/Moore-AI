@@ -73,7 +73,7 @@
     {% set nav_items = [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('FAQ', '/faq'), ('Contact', '/#contact')] %}
     {% for label, path in nav_items %}
       {% if not loop.first %}
-        <span class="hidden md:inline text-brand-red font-bold px-2">|</span>
+        <span class="hidden md:inline text-brand-red font-bold px-2 text-2xl">│</span>
       {% endif %}
       <a href="{{ path }}" class="text-brand-light {% if request.path == path %}bg-brand-burgundy px-3 py-1 rounded-md{% else %}hover:text-brand-red{% endif %} transition-colors duration-200">
         {{ label }}
