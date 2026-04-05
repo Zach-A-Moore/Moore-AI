@@ -70,7 +70,7 @@
       </button>
       <nav id="main-nav" class="hidden md:flex flex-col md:flex-row absolute md:static bg-brand-night md:bg-transparent right-4 top-24 z-50 p-4 rounded-md shadow-lg md:shadow-none border border-brand-burgundy md:border-none">
   <div class="flex flex-col md:flex-row text-sm font-bold text-brand-light space-y-2 md:space-y-0">
-    {% set nav_items = [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Team', '/team'), ('FAQ', '/faq'), ('Contact', '/#contact')] %}
+    {% set nav_items = [('Home', '/'), ('About', '/about'), ('Services', '/services'), ('Case Studies', '/projects'), ('Team', '/team'), ('FAQ', '/faq'), ('Contact', '/#contact')] %}
     {% for label, path in nav_items %}
       {% if not loop.first %}
         <span class="hidden md:inline text-brand-red font-bold px-2 text-2xl">│</span>
