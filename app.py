@@ -115,7 +115,7 @@ def send_email_notification(name, sender_email, message_body):
         print("Warning: EMAIL_APP_PASSWORD not set in environment variables")
         return False
 
-    recipient = "zacharyalexmoore1@gmail.com"
+    recipient = "team@mooreai.net"
     subject = "New Contact Form Submission - Moore AI"
     body = f"""
 New contact form submission from Moore AI website:
